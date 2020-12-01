@@ -9,28 +9,31 @@ else
 	rpcpassword=$2
 fi
 
-PAICOIN_INSTALL_PATH=/usr/paicoin-org
-PAICOIN_DATA_PATH=/root/.paicoin
+PAICOIN_INSTALL_PATH=~/paicoin-org
+PAICOIN_DATA_PATH=~/.paicoin
 PAICOIN_CONFIG=paicoin.conf
 
-apt-get update -y
-apt-get install -y curl build-essential autoconf libtool pkg-config bsdmainutils checkinstall libevent-dev libssl-dev libzmq5-dev \
+sudo apt-get update -y
+sudo apt-get install -y curl build-essential autoconf libtool pkg-config bsdmainutils checkinstall libevent-dev libssl-dev libzmq5-dev \
       libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-thread-dev libboost-test-dev \
       libdb-dev libdb++-dev
 
-if [[ ! -d "$PAICOIN_INSTALL_PATH" ]]; then
- mkdir $PAICOIN_INSTALL_PATH
-fi
-cd $PAICOIN_INSTALL_PATH
+cd ~/
 
-curl -L http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz -o db-4.8.30.NC.tar.gz
-tar -xvf db-4.8.30.NC.tar.gz
+wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
+tar -xzf db-4.8.30.NC.tar.gz
 sed -i 's/__atomic_compare_exchange/__atomic_compare_exchange_db/g' db-4.8.30.NC/dbinc/atomic.h
 cd db-4.8.30.NC/build_unix
 mkdir -p build
 BDB_PREFIX=$(pwd)/build
 ../dist/configure --disable-shared --enable-cxx --with-pic --prefix=$BDB_PREFIX
+[ $? -ne 0 ] && echo "configure berkeley-db failed" && exit -1
 make install
+[ $? -ne 0 ] && echo "make berkeley-db failed" && exit -1
+
+if [[ ! -d "$PAICOIN_INSTALL_PATH" ]]; then
+ mkdir -p $PAICOIN_INSTALL_PATH
+fi
 
 cd $PAICOIN_INSTALL_PATH
 
@@ -38,10 +41,12 @@ git clone https://github.com/projectpai/paicoin.git
 cd paicoin
 ./autogen.sh
 ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --disable-tests
+[ $? -ne 0 ] && echo "configure paicoin-core failed" && exit -1
 make
+[ $? -ne 0 ] && echo "make paicoin-core failed" && exit -1
 
 if [[ ! -d "$PAICOIN_DATA_PATH" ]]; then
- mkdir $PAICOIN_DATA_PATH
+ mkdir -p $PAICOIN_DATA_PATH
 fi
 
 cd $PAICOIN_DATA_PATH
@@ -50,17 +55,14 @@ echo daemon=1 > $PAICOIN_CONFIG
 echo rpcuser=$rpcuser >> $PAICOIN_CONFIG
 echo rpcpassword=$rpcpassword >> $PAICOIN_CONFIG
 
-if   [ ! $PAICOIN_PATH ];  
-then  
-	echo "ADD PAICOIN_PATH = $PAICOIN_INSTALL_PATH/paicoin/src"  
-	echo export PAICOIN_PATH=$PAICOIN_INSTALL_PATH/paicoin/src >> /etc/profile
-	echo export PATH=$PAICOIN_INSTALL_PATH/paicoin/src:$PATH >> /etc/profile
-fi 
+if   [ ! $PAICOIN_PATH ];
+then
+	echo "ADD PAICOIN_PATH = $PAICOIN_INSTALL_PATH/paicoin/src"
+	echo "export PAICOIN_PATH=$PAICOIN_INSTALL_PATH/paicoin/src" >> ~/.bashrc
+	echo "export PATH=$PAICOIN_INSTALL_PATH/paicoin/src:\$PATH" >> ~/.bashrc
+fi
 
-source /etc/profile
-
-echo "Congratulations, Paicoin Core has been installed successfully！"
-echo "Start the Paicoin core with command: paicoind"
+echo ""
+echo "Congratulations, Paicoin Core has been installed successfully!"
+echo "Start the Paicoin core with command: source ~/.bashrc && paicoind"
 echo "rpcuser=$rpcuser rpcpassword=$rpcpassword"
-
-
