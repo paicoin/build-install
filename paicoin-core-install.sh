@@ -60,6 +60,13 @@ then
 	echo "ADD PAICOIN_PATH = $PAICOIN_INSTALL_PATH/paicoin/src"
 	echo "export PAICOIN_PATH=$PAICOIN_INSTALL_PATH/paicoin/src" >> ~/.bashrc
 	echo "export PATH=$PAICOIN_INSTALL_PATH/paicoin/src:\$PATH" >> ~/.bashrc
+
+    if [ ! -r ~/.bash_profile ];
+    then
+        echo "if [ -r ~/.bashrc ] ; then" >> ~/.bash_profile
+        echo "   . ~/.bashrc" >> ~/.bash_profile
+        echo "fi" >> ~/.bash_profile
+    fi
 fi
 
 echo ""
