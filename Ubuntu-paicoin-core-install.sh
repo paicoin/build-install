@@ -71,5 +71,5 @@ fi
 
 echo ""
 echo "Congratulations, Paicoin Core has been installed successfully!"
-echo "Start the Paicoin core with command: source ~/.bashrc && paicoind"
+echo "Start the Paicoin core with command: 'source ~/.bashrc && paicoind'"
 echo "rpcuser=$rpcuser rpcpassword=$rpcpassword"

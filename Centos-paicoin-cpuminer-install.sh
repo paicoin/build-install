@@ -34,5 +34,5 @@ fi
 
 echo ""
 echo "Congratulations, Paicoin cpuminer has been installed successfully"
-echo "Start the Paicoin cpuminer with command: source ~/.bashrc && minerd -a paicoin -o http://127.0.0.1:8566 -u pai -p paicoin.org --coinbase-addr=your_pai_wallet_address --no-stratum &> ~/cpu-miner-output.log &"
+echo "Start the Paicoin cpuminer with command: 'source ~/.bashrc && minerd -a paicoin -o http://127.0.0.1:8566 -u pai -p paicoin.org --coinbase-addr=your_pai_wallet_address --no-stratum &> ~/cpu-miner-output.log &'"
 echo "You can check the ~/cpu-miner-output.log file to evaluate the performance of the miner."

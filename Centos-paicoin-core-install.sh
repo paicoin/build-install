@@ -14,7 +14,8 @@ PAICOIN_DATA_PATH=~/.paicoin
 PAICOIN_CONFIG=paicoin.conf
 
 sudo yum upgrade -y
-sudo yum install -y git curl gcc gcc-c++ make autoconf libtool pkg-config libevent-devel openssl-devel zeromq-devel boost-devel libdb-devel
+sudo yum -y install epel-release
+sudo yum install -y wget tar git curl gcc gcc-c++ make autoconf libtool pkg-config libevent-devel openssl-devel zeromq-devel boost-devel libdb-devel
 
 cd ~/
 
@@ -69,5 +70,5 @@ fi
 
 echo ""
 echo "Congratulations, Paicoin Core has been installed successfully!"
-echo "Start the Paicoin core with command: source ~/.bashrc && paicoind"
+echo "Start the Paicoin core with command: 'source ~/.bashrc && paicoind'"
 echo "rpcuser=$rpcuser rpcpassword=$rpcpassword"
