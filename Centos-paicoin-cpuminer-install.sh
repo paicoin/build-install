@@ -2,9 +2,9 @@
 
 PAICOIN_INSTALL_PATH=~/paicoin-org
 
-sudo apt-get update -y
+sudo yum upgrade -y
 
-sudo apt install libcurl4-gnutls-dev
+sudo yum install -y libcurl-devel
 
 if [[ ! -d "$PAICOIN_INSTALL_PATH" ]]; then
     mkdir -p $PAICOIN_INSTALL_PATH
