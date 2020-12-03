@@ -76,7 +76,7 @@ source ~/.bashrc
 ```
 minerd -a paicoin -o http://127.0.0.1:8566 -u pai -p paicoin.org --coinbase-addr=your_pai_wallet_address --no-stratum &> ~/cpu-miner-output.log &
 ```
-**提醒：请蒋 your_pai_wallet_address 替换成自己的PAI Coin地址，类似（PYtGb5EfhQ6dJW6Ak4nhp1HYGAaq3iUoD6）。**
+**提醒：请将 your_pai_wallet_address 替换成自己的PAI Coin地址，类似（PYtGb5EfhQ6dJW6Ak4nhp1HYGAaq3iUoD6）。**
 检查挖矿程序启动情况
 ```
 tail ~/cpu-miner-output.log
