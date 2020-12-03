@@ -108,5 +108,5 @@ PAI Coin 地址:
 ```
 PYtGb5EfhQ6dJW6Ak4nhp1HYGAaq3iUoD6
 ```
-![donate PAI Coin](https://github.com/paicoin/build-install/blob/feature-add-readme/doc/pic/donate-paicoin.png)
+![donate PAI Coin](http://paicoin.org/images/paicoin/donate-paicoin.png)
 
