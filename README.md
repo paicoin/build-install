@@ -108,4 +108,4 @@ PAI Coin address:
 ```
 PYtGb5EfhQ6dJW6Ak4nhp1HYGAaq3iUoD6
 ```
-![donate PAI Coin](/doc/pic/donate-paicoin.png)
+![donate PAI Coin](https://github.com/paicoin/build-install/blob/feature-add-readme/doc/pic/donate-paicoin.png)
