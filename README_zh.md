@@ -89,6 +89,12 @@ tail ~/cpu-miner-output.log
 [2020-12-02 06:39:56] thread 0: 322229 hashes, 66.22 khash/s
 ```
 
+如出现以下信息，表示区块未完成同步，cpu挖矿程序在等待区块链同步结束，这个情况一般等区块同步完成后会正常
+```
+HTTP request failed: The requested URL returned error: 500 Internal Server Error
+json_rpc_call failed, retry after 30 seconds
+```
+
 ## 为 Paicoin 做贡献
 
 Paicoin 是一个免费且开源的项目，我们欢迎任何人为其开发和进步贡献力量，在使用过程中出现任何问题，可以通过以下途径给我们反馈。

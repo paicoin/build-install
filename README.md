@@ -89,6 +89,12 @@ If the following message appears, the mining program has started successfully
 [2020-12-02 06:39:56] thread 0: 322229 hashes, 66.22 khash/s
 ```
 
+If the following message appears, it means that the block has not been synchronized, and the cpu mining program is waiting for the end of the block chain synchronization. This situation will generally be normal after the block synchronization is completed.
+```
+HTTP request failed: The requested URL returned error: 500 Internal Server Error
+json_rpc_call failed, retry after 30 seconds
+```
+
 ## Contribute to Paicoin
 
 Paicoin is a free and open source project. We welcome anyone to contribute to its development and progress. If there are any problems during use, you can give us feedback through the following channels.
