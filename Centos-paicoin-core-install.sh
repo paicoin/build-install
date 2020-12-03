@@ -19,6 +19,24 @@ sudo yum install -y wget tar git curl gcc gcc-c++ make autoconf libtool pkg-conf
 
 cd ~/
 
+hostnamectl | grep 'CentOS Linux 7'
+if [ $? -eq 0 ]
+then
+    sudo yum install -y centos-release-scl
+    sudo yum install -y devtoolset-8-gcc devtoolset-8-gcc-c++
+    source scl_source enable devtoolset-8
+
+    wget https://dl.bintray.com/boostorg/release/1.67.0/source/boost_1_67_0.tar.gz
+    tar xzf boost_1_67_0.tar.gz
+    cd boost_1_67_0
+    ./bootstrap.sh
+    ./b2 install
+    export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
+    echo "export LD_LIBRARY_PATH=/usr/local/lib/:\$LD_LIBRARY_PATH" >> ~/.bashrc
+fi
+
+cd ~/
+
 wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
 tar -xzf db-4.8.30.NC.tar.gz
 sed -i 's/__atomic_compare_exchange/__atomic_compare_exchange_db/g' db-4.8.30.NC/dbinc/atomic.h
@@ -39,7 +57,7 @@ cd $PAICOIN_INSTALL_PATH
 git clone https://github.com/projectpai/paicoin.git
 cd paicoin
 ./autogen.sh
-./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --disable-tests
+./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/ -L/usr/local/lib/" --disable-tests
 [ $? -ne 0 ] && echo "configure paicoin-core failed" && exit -1
 make
 [ $? -ne 0 ] && echo "make paicoin-core failed" && exit -1
